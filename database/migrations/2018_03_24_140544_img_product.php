@@ -13,7 +13,14 @@ class ImgProduct extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('img_product', function (Blueprint $table) {
+//            $table->increments('id');
+            $table->primary(['img_id', 'product_id']);
+
+            $table->integer('img_id')->index();
+            $table->integer('product_id')->index();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +30,7 @@ class ImgProduct extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('img_product');
+
     }
 }

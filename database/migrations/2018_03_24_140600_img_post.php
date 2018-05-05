@@ -13,7 +13,13 @@ class ImgPost extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('img_post', function (Blueprint $table) {
+//            $table->increments('id');
+            $table->primary(['img_id', 'post_id']);
+            $table->integer('img_id')->index();
+            $table->integer('post_id')->index();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +29,7 @@ class ImgPost extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('img_post');
+
     }
 }

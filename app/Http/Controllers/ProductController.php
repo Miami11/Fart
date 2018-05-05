@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -14,7 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return view('upload');
     }
 
     /**
@@ -81,5 +83,22 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+
+
+
+    public function upload(Request $request)
+    {
+        $path = public_path('/uploads/images/products');
+        $name = 'product'.time().'.jpg';
+        if ($request->hasFile('myFile')){
+            if (is_dir($path))
+            {
+                File::makeDirectory($path, $mode = 0777, true, true);
+            }
+          $request->file('myFile')->move($path, $name);
+        }
+           $path = 'uploads/images/products/'.$name;
+        return view('upload',['img_path' => $path]);
     }
 }

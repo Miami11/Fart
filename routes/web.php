@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('file', 'ProductController@index');
+Route::post('upload','ProductController@upload')->name('admin.upload');
+
+Route::get('category/{id}','CategoryController@index')->name('category.index');
+Route::resource('posts', 'Admin\PostController');
+Route::get('user/verify/{verification_code}', 'AuthController@verifyUser');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');
+Route::post('password/reset', 'Auth\ResetPasswordController@postReset')->name('password.reset');
