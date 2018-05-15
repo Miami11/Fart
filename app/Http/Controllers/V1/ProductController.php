@@ -30,11 +30,9 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        // request 近來幾筆
-//        dd(Product::with('coupons')->get());
+
         return ProductResource::collection(Product::all());
-//        dd(Categories::collection(Product::find(1)));
-//        return ProductResource::collection(Product::all());
+
     }
 
     public function categories()
@@ -45,7 +43,7 @@ class ProductController extends Controller
 
     public function getProductRank(Request $request)
     {
-        $take = $request->pageSiz;
+        $take = $request->pageSize;
         $getAll = $this->repository->getOrderDetails();
         $product = $take
             ? $this->repository->queryCountOrderDetails($take)
@@ -87,7 +85,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {   
+    {
         return new ProductResource(Product::find($id));
     }
 

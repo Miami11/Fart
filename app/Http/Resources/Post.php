@@ -26,7 +26,7 @@ class Post extends JsonResource
             //點進去後才有留言
 //            'relationships' => new PostRelationshipResource($this),
             'links' => [
-                'self' => route('posts.show', ['post' => $this->id]),
+                'self' => route('post.show', ['post' => $this->id]),
             ]
         ];
     }

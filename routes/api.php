@@ -29,21 +29,35 @@ Route::post('register', 'AuthController@register');
 Route::group(['middleware' => ['api']], function () {
     Route::post('auth/login', 'ApiController@login');
     Route::group(['middleware' => 'jwt.auth'], function () {
-        Route::get('user', 'ApiController@getAuthUser');
+        Route::post('user', 'ApiController@getAuthUser');
     });
 });
 
-Route::group(['middleware' => ['jwt.auth']], function() {
+Route::group(['middleware' => ['jwt.auth']], function () {
     Route::get('logout', 'AuthController@logout');
-    Route::get('test', function(){
-        return response()->json(['foo'=>'bar']);
+    Route::get('test', function () {
+        return response()->json(['foo' => 'bar']);
     });
 });
 
-Route::prefix('v1')->group(function(){
-    Route::get('/', 'V1\ProductController@index');
-    Route::post('/','V1\ProductController@getProductRank');
-});
 
-Route::apiResource('/v1/post','V1\PostController');
-Route::apiResource('/v1/product','V1\ProductController');
+Route::group(['middleware' => ['api']], function () {
+    Route::group(['middleware' => 'jwt.auth'], function () {
+        Route::post('like', 'LikeController')->name('like.hit');
+        Route::get('/', 'V1\ProductController@index');
+        Route::post('/', 'V1\ProductController@getProductRank')->name('product.rank');
+
+    });
+});
+Route::prefix('v1')->group(function () {
+    Route::get('category/{id}', 'CategoryController@categoryWithProduct')->name('category.product');
+    Route::get('category', 'CategoryController@index')->name('category.index');
+
+});
+//用prefix 出錯
+//Route::prefix('v1')->group(function () {
+
+
+Route::apiResource('/v1/post', 'V1\PostController');
+Route::apiResource('/v1/product', 'V1\ProductController');
+

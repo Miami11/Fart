@@ -4,6 +4,7 @@ namespace App\Http\Controllers\V1;
 
 use App\Http\Resources\Post as PostResource;
 use App\Http\Resources\PostCollection;
+use App\Http\Resources\Product;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Http\Controllers\Controller;
@@ -17,9 +18,6 @@ class PostController extends Controller
      */
     public function index()
     {
-        //PsotResource with imgs
-//        dd(Post::all());
-//        dd(Post::with('imgs')->get());
 //        return new PostCollection(Post::all());
         return PostResource::collection(Post::paginate());
 //        return PostResource::collection($post->with());
@@ -54,7 +52,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        return new PostResource(Post::find($id));
     }
 
     /**
