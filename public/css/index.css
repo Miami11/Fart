@@ -1,0 +1,354 @@
+html,body{
+	font-family: 'Oswald', sans-serif, '微軟正黑體';
+	font-size: 18px;
+	line-height: 1.5;
+}
+a{
+	text-decoration: none;
+}
+.navArea{
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0px 0px 25px #333;
+	height: 60px;
+}
+.leftNav{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.rightNav{
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+.rightNav > div, .logo, .ham{
+	padding: 0 20px;
+	cursor: pointer;
+}
+.navTabs{
+	display: flex;
+}
+.navTabs .fa-angle-down{
+	padding-left: 10px;
+}
+.navTabs.navIn{
+	left: 0%;
+}
+.upAndDown{
+	animation: 3s upAndDown infinite linear;
+}
+.topArea{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	box-sizing: border-box;
+	padding: 20px;
+	width: 100%;
+}
+.leftProd, .midProd1, .midProd2, .rightProd{
+	box-shadow: 4px 5px 20px rgba(0,0,0,0.4);
+}
+.midProd{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction:column;
+}
+.leftProd, .midProd1, .midProd2, .rightProd{
+	background-position: center center;
+	background-size: auto;
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+.indexHoverBtns{
+	position: relative;
+	overflow: hidden;
+}
+.indexHoverBtns:after{
+	content: 'Shop now';
+	display: block;
+	position: absolute;
+	width: 100px;
+	height: 40px;
+	line-height: 40px;
+	border-radius: 3px;
+	background-color: rgba(255,255,255,0.45);
+	border: 1px solid #000;
+	color: #000;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, 300px);
+	text-align: center;
+	transition: 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+}
+.indexHoverBtns:hover:after{
+	color: #fff;
+	background-color: #000;
+	transform: translate(-50%, -50%);
+}
+.midProd1, .midProd2{
+	flex: 1;
+	width: 100%;
+}
+.midProd1{
+	/*margin-bottom: 10px;*/
+}
+.midProd2{
+	margin-top: 10px;
+}
+.ovh{
+	overflow: hidden;
+}
+.secondArea{
+	margin: 20px;
+	background-image: url("https://picsum.photos/950/450/?image=971");
+	padding: 100px 20px;
+	background-size: cover;
+	text-align: right;
+}
+.thirdArea{
+	overflow: hidden;
+}
+.thirdArea .sliderWrap{
+	white-space: nowrap;
+	overflow-x: hidden;
+}
+.thirdArea .prodItem{
+	display: inline-flex;
+	flex-direction: column;
+	align-items: center;
+	box-sizing: border-box;
+	cursor: pointer;
+	position: relative;
+}
+img.prodImg{
+	width: 100%;
+	position: relative;
+}
+.tac{
+	text-align: center;
+}
+.specialPrizeArea{
+	display: flex;
+	justify-content: center;
+	align-items: baseline;
+}
+.orgPrize{
+	text-decoration: line-through;
+}
+.newPrize{
+	color: #f00;
+	padding-left: 5px;
+	font-size: 1.2em;
+}
+.container{
+	max-width: 1200px;
+	margin: 0 auto;
+}
+.prodContent{
+	transition: .5s;
+}
+img.indexLogo{
+	width: 48px;
+}
+.banner1{
+	background-image: url(../images/index/4.jpg);
+}
+.banner2{
+	background-image: url(../images/index/2-1.jpg);
+	background-position: bottom;
+}
+.banner3{
+	background-image: url(../images/index/2-2.jpg);
+	background-position: top;
+}
+.banner4{
+	background-image: url(../images/index/3.jpg);
+}
+.prodPopup{
+	position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    box-shadow: -5px 5px 25px #ccc;
+    transition: .5s;
+}
+.prodPopup:hover{
+	box-shadow: -2px 2px 15px #666;
+}
+.likeBtn, .cartBtn{
+	position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    right: -100px;
+    z-index: 2;
+    transition: .5s;
+    font-size: 25px;
+    color: #fff;
+    border: 2px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.likeBtn{
+	top: 15px;
+}
+.cartBtn{
+	top: 70px;
+}
+.likeBtn:hover{
+	background-color: #fff;
+	color: #e46e6e;
+}
+.cartBtn:hover{
+	background-color: #fff;
+	color: #ec9736;
+}
+
+/*mobile device*/
+@media screen and (max-width: 767px) {
+	.navArea{
+		position: fixed;
+		background-color: #fff;
+		z-index: 99;
+	}
+	.leftNav{
+		flex: 1;
+	}
+	.rightNav{
+		flex: 2;
+	}
+	.logo{
+		display: none;
+	}
+	.navTabs{
+		display: flex;
+		justify-content: baseline;
+		align-items: flex-start;
+		flex-direction:column;
+		width: 100%;
+		height: calc(100vh - 50px);
+		position: absolute;
+		top: 50px;
+		left: -100%;
+		transition: 0.5s;
+		background-color: rgba(255,255,255,0.8);
+		z-index: 100;
+	}
+	.navTabs > div{
+		padding: 20px 20px;
+		cursor: pointer;
+	}
+	.topArea{
+		flex-direction: column;
+		padding-top: 70px;
+	}
+	.leftProd, .midProd, .rightProd{
+		height: 300px;
+		width: 95%;
+		max-width: 400px;
+		margin: 10px 0px;
+	}
+	h2{
+		font-size: 25px;
+	}
+	h3{
+		font-size: 20px;
+	}
+	.thirdArea .prodItem{
+		width: calc(100% - 102px);
+		box-sizing: border-box;
+		margin: 50px;
+	}
+	.indexSlider0{
+		transform: translateX(0%);
+	}
+	.indexSlider1{
+		transform: translateX(-100%);
+	}
+	.indexSlider2{
+		transform: translateX(-200%);
+	}
+	.indexSlider3{
+		transform: translateX(-300%);
+	}
+	.indexSlider4{
+		transform: translateX(-400%);
+	}
+	.indexSlider5{
+		transform: translateX(-500%);
+	}
+	.prodPopup:hover .likeBtn, .prodPopup:hover .cartBtn{
+		right: 30px;
+	}
+}
+
+/*PC*/
+@media screen and (min-width: 768px) {
+	.leftNav{
+		flex: 4;
+	}
+	.rightNav{
+		flex: 1;
+	}
+	.ham{
+		display: none;
+	}
+	.navTabs{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.navTabs > div{
+		margin: 0px 20px;
+		cursor: pointer;
+	}
+	.leftProd, .midProd, .rightProd{
+		height: 600px;
+		width: 32%;
+		max-width: 450px;
+	}
+	h2{
+		font-size: 35px;
+	}
+	h3{
+		font-size: 30px;
+	}
+	.thirdArea .prodItem{
+		width: calc(33.333% - 62px);
+		margin: 30px;
+	}
+	.indexSlider0{
+		transform: translateX(0%);
+	}
+	.indexSlider1{
+		transform: translateX(-33.333%);
+	}
+	.indexSlider2{
+		transform: translateX(-66.666%);
+	}
+	.indexSlider3{
+		transform: translateX(-100%);
+	}
+	.indexSlider4{
+		transform: translateX(-133.333%);
+	}
+	.indexSlider5{
+		transform: translateX(-166.666%);
+	}
+	.prodPopup:hover .likeBtn, .prodPopup:hover .cartBtn{
+		right: 10px;
+	}
+}
+
+/*keyframs*/
+@keyframes upAndDown{
+	0% { transform: translateY(0px); }
+	25% { transform: translateY(3px); }
+	75% { transform: translateY(-3px); }
+	100% { transform: translateY(0px); }
+}

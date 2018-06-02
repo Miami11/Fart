@@ -14,6 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('lin')->group(function() {
+	Route::get('oop','ProductController@show');
+	Route::get('ppo','ProductController@test');
+
+});
+
 Route::get('file', 'ProductController@index');
 Route::post('upload','ProductController@upload')->name('admin.upload');
 
