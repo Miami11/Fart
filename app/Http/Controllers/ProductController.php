@@ -48,7 +48,12 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return view('product.component.oop');
+    }
+
+    public function test()
+    {
+        return view('product.component.ppo');
     }
 
     /**
