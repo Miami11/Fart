@@ -8,12 +8,39 @@ use App\Http\Controllers\Controller;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class ApiController extends Controller
 {
     public function __construct()
     {
         $this->user = new User;
+    }
+    public function register(Request $request)
+    {
+        $credentials = $request->only('name', 'email', 'password','tel','img');
+
+        $rules = [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users'
+        ];
+        $validator = Validator::make($credentials, $rules);
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'error' => $validator->messages()]);
+        }
+        $name = $request->name;
+        $email = $request->email;
+        $password = $request->password;
+
+        User::create([
+            'name' => $name,
+            'email' => $email,
+            'password' => Hash::make($password),
+            'tel'=> $request->tel,
+            'img' => $request->img,
+        ]);
+        return response()->json(['success' => true]);
     }
 
     public function login(Request $request){
