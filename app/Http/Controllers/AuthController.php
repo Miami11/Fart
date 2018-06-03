@@ -56,6 +56,7 @@ class AuthController extends Controller
             'tel'=> $request->tel,
            'img' => $request->img,
        ]);
+       return response()->json(['success' => true]);
     }
 
     public function login(Request $request)
