@@ -15,9 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('lin')->group(function() {
-	Route::get('oop','ProductController@show');
-	Route::get('ppo','ProductController@test');
+Route::prefix('entry')->group(function() {
+	Route::get('login','ProductController@show');
+	Route::get('register','ProductController@test');
 
 });
 
