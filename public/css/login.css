@@ -1,0 +1,84 @@
+html,body{
+	font-family: 'Oswald', sans-serif, '微軟正黑體';
+	font-size: 18px;
+	line-height: 1.5;
+}
+body{
+	background-image: url(../images/background/gray-1.jpg);
+	-webkit-background-size: cover;
+	background-size: cover;
+	background-repeat: no-repeat;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+}
+a{
+	text-decoration: none;
+}
+.inputArea{
+	width: 80%;
+    max-width: 520px;
+    background-color: #eee;
+    box-sizing: border-box;
+    padding: 20px;
+    margin: 0 auto;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    position: absolute;
+    left: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 240px;
+    box-shadow: 0px -1px 15px rgba(33,33,33,.3);
+}
+.loginTab, .registerTab{
+	position: absolute;
+    top: -35px;
+    width: 100px;
+    height: 35px;
+    background-color: #eee;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0px 0px 0px transparent, -3px -3px 3px rgba(33,33,33,.1), -2px -2px 3px rgba(33,33,33,.1), 3px -4px 3px rgba(33,33,33,.1);
+    transform: translateY(3px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: .3s;
+}
+.loginTab:hover, .registerTab:hover{
+	top: -40px;
+	height: 40px;
+}
+.loginTab.active, .registerTab.active{
+	top: -60px;
+	height: 60px;
+}
+.loginTab{
+	left: 0;
+}
+.registerTab{
+	right: 0;
+}
+.inputArea input{
+	border: 1px solid rgba(22,22,22,.5);
+    padding: 3px;
+    border-radius: 3px;
+    width: 160px;
+}
+.inputArea button{
+	width: 220px;
+    padding: 5px;
+    display: block;
+    margin: 15px auto;
+    background: #fff;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.loginId, .loginPwd{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0px;
+}
