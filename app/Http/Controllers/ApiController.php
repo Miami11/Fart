@@ -33,14 +33,17 @@ class ApiController extends Controller
         $email = $request->email;
         $password = $request->password;
 
-        User::create([
+       $user = User::create([
             'name' => $name,
             'email' => $email,
             'password' => Hash::make($password),
             'tel'=> $request->tel,
             'img' => $request->img,
         ]);
-        return response()->json(['success' => true]);
+        return response([
+            'status' => 'success',
+            'data' => $user
+        ], 200);
     }
 
     public function login(Request $request){
@@ -60,15 +63,32 @@ class ApiController extends Controller
             ]);
         }
         return response()->json([
-            'response' => 'success',
+            'success' => true,
             'result' => [
                 'token' => $token,
             ],
         ]);
     }
 
+    public function logout()
+    {
+        JWTAuth::invalidate();
+        return response([
+            'status' => 'success',
+            'msg' => 'Logged out Successfully.'
+        ], 200);
+    }
+
     public function getAuthUser(Request $request){
+        
         $user = JWTAuth::toUser($request->token);
         return response()->json(['result' => $user]);
+    }
+
+    public function refresh()
+    {
+        return response([
+            'status' => 'success'
+        ]);
     }
 }
