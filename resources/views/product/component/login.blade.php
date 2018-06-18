@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/cssReset.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/index.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/login.css') }}">
         <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
         <title>F.A.R.T</title>
         <script src="{{ asset('js/vue.js') }}"></script>
@@ -13,10 +13,36 @@
     </head>
 <body>
 	<div id="app">
-        <p>LOGIN</p>
+        <div class="inputArea">
+            <div class="loginTab" :class="{active: operation == 1}" v-on:click="operation = 1">登入</div>
+            <div class="registerTab" :class="{active: operation == 2}" v-on:click="operation = 2">註冊</div>
+            <div v-if="operation == 1">
+                <div class="loginId">
+                    帳號：
+                    <input type="text">
+                </div>
+                <div class="loginPwd">
+                    密碼：
+                    <input type="password">
+                </div>
+                <button>登入</button>
+            </div>
+            <div v-if="operation == 2">
+                <div class="loginId">
+                    帳號：
+                    <input type="text" placeholder="請使用有效信箱作為登入帳號">
+                </div>
+                <div class="loginPwd">
+                    密碼：
+                    <input type="password">
+                </div>
+                <button>註冊</button>
+            </div>
+        </div>
+        <!-- <p>LOGIN</p>
         <input type="text" v-model="email">   
         <input type="password" v-model="password">
-        <h1 @click="login">BTN</h1>
+        <h1 @click="login">BTN</h1> -->
     </div>
 </body>
 </html>
@@ -26,7 +52,8 @@ new Vue({
     el: '#app',
     data: {
         email: '',
-        password: ''
+        password: '',
+        operation: 1,
     },
     mounted: function(){
         
