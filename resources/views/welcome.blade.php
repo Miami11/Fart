@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="rightNav">
-                    <div class="contact">聯絡我們</div>
+                    <div class="login">登入</div>
                     <div class="shopCar"><i class="fas fa-shopping-cart"></i></div>
                 </div>
             </div>
@@ -143,9 +143,9 @@ new Vue({
     },
     created: function(){
         var _this = this;
-        setInterval(function(){
-            _this.counting += 1;
-        }, 2000);
+        // setInterval(function(){
+        //     _this.counting += 1;
+        // }, 2000);
     },
     mounted: function(){
         console.log('mounted get product data');
