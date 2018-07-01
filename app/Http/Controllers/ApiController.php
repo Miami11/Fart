@@ -22,12 +22,20 @@ class ApiController extends Controller
         $credentials = $request->only('name', 'email', 'password','tel','img');
 
         $rules = [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users'
+            'name' => 'required|max:10',
+            'email' => 'required|email|max:100|unique:users',
+            'password' => 'required|alphaNum|min:5|max:10',
+            'tel' => 'required|numeric|min:10|max:10',
         ];
-        $validator = Validator::make($credentials, $rules);
+        $messages = [
+            'name'    => '請務必填寫,最大10個字數',
+            'email'    => '最大字數100且只能註冊一次',
+            'password' => '5~10個密碼需含英文數字',
+            'tel'      => '10位數字',
+        ];
+        $validator = Validator::make($credentials, $rules,$messages);
         if ($validator->fails()) {
-            return response()->json(['success' => false, 'error' => $validator->messages()]);
+            return response()->json(['status' => 'fail', 'error' => $validator->messages()]);
         }
         $name = $request->name;
         $email = $request->email;
@@ -38,7 +46,7 @@ class ApiController extends Controller
             'email' => $email,
             'password' => Hash::make($password),
             'tel'=> $request->tel,
-            'img' => $request->img,
+            'img' => 'images/default/rabbit.jpg',
         ]);
         return response([
             'status' => 'success',
@@ -49,6 +57,18 @@ class ApiController extends Controller
     public function login(Request $request){
         $credentials = $request->only('email', 'password');
         $token = null;
+        $rules = [
+            'email' => 'required|email|max:100',
+            'password' => 'required|alphaNum|min:5|max:10',
+        ];
+        $messages = [
+            'email'    => '請輸入eamil格式',
+            'password' => '5~10個密碼需含英文數字',
+        ];
+        $validator = Validator::make($credentials, $rules,$messages);
+        if ($validator->fails()) {
+            return response()->json(['status' => 'fail', 'error' => $validator->messages()]);
+        }
         try {
             if (!$token = JWTAuth::attempt($credentials)) {
                 return response()->json([
@@ -63,7 +83,7 @@ class ApiController extends Controller
             ]);
         }
         return response()->json([
-            'success' => true,
+            'status' => 'success',
             'result' => [
                 'token' => $token,
             ],
@@ -75,14 +95,14 @@ class ApiController extends Controller
         JWTAuth::invalidate();
         return response([
             'status' => 'success',
-            'msg' => 'Logged out Successfully.'
+            'message' => 'Logged out Successfully.'
         ], 200);
     }
 
     public function getAuthUser(Request $request){
         
         $user = JWTAuth::toUser($request->token);
-        return response()->json(['result' => $user]);
+        return response()->json(['status' => 'success','result' => $user]);
     }
 
     public function refresh()

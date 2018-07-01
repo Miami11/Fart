@@ -18,12 +18,15 @@ class Product extends JsonResource
 
             'type' => 'products',
             'id' => $this->id,
+
             'attributes' => [
-                'img' => (new ProductImgsRelationshipResource($this->imgs))->additional(['product' => $this]),
+                'img' => $this->imgs,
                 'price' => $this->price,
                 'name' => $this->name,
+                'discount' => new CouponCollection($this->coupons)
+//                'discount' => Coupon::collection($this->coupons)
             ],
-            'coupon' =>  new Coupon($this->coupons),
+
             'links' => [
                 'self' => route('product.show', ['product' => $this->id]),
             ]
@@ -35,4 +38,10 @@ class Product extends JsonResource
 //            'created_at' => optional($this->created_at)->toDateTimeString(),
 //        ];
     }
+//    public function with() {
+//        return [
+//        'sa' => 'bb'
+////            'coupon' =>  Coupon::collection($this->coupons),
+//        ];
+//    }
 }

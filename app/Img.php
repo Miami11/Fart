@@ -17,4 +17,11 @@ class Img extends Model
     {
         return $this->belongsToMany('App\Product');
     }
+
+    public function toArray()
+    {
+        return [
+            'path' => $this->path
+        ];
+    }
 }
