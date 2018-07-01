@@ -208,6 +208,19 @@ img.indexLogo{
 	background-color: #fff;
 	color: #ec9736;
 }
+.fourthArea{
+	padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(to bottom, #fff, #e1e1e1);
+}
+.footerText{
+	margin-right: 20px;
+}
+img.footerLogo{
+	width: 100px;
+}
 
 /*mobile device*/
 @media screen and (max-width: 767px) {
