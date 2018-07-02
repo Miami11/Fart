@@ -1,0 +1,65 @@
+/*toast*/
+.modal{
+	position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal .message-body{
+	width: 40%;
+    min-width: 300px;
+    background-color: #fff;
+    border: 2px solid #f78b8b;
+    box-sizing: border-box;
+    padding: 10px;
+    position: relative;
+    overflow: hidden;
+    transition: .3s;
+    transform: scaleX(1);
+}
+.modal .message-content{
+	text-align: center;
+    letter-spacing: 1px;
+    line-height: 1.5;
+}
+.modal .message-confirm{
+	width: 130px;
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: #f78b8b;
+    border: none;
+    color: #fff;
+    font-size: 15px;
+    display: block;
+    margin: 20px auto 0px;
+    cursor: pointer;
+}
+.modal .close-modal{
+	position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #f78b8b;
+    cursor: pointer;
+}
+.modal .close-modal:before, .modal .close-modal:after{
+	content: '';
+    display: block;
+    position: absolute;
+    top: 32px;
+    left: 8px;
+    width: 20px;
+    height: 2px;
+    background-color: #fff;
+}
+.modal .close-modal:before{
+    transform: rotateZ(45deg);
+}
+.modal .close-modal:after{
+    transform: rotateZ(-45deg);
+}

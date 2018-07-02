@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Auth::routes();
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -24,7 +25,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    });
 //});
 //Route::post('login', 'AuthController@login');
-Route::post('register', 'AuthController@register');
+Route::post('register', 'ApiController@register');
 
 Route::group(['middleware' => ['api']], function () {
     Route::post('auth/login', 'ApiController@login');
@@ -33,8 +34,13 @@ Route::group(['middleware' => ['api']], function () {
     });
 });
 
+Route::group(['middleware' => 'jwt.refresh'], function(){
+    Route::get('auth/refresh', 'ApiController@refresh');
+});
+
 Route::group(['middleware' => ['jwt.auth']], function () {
-    Route::get('logout', 'AuthController@logout');
+    Route::post('auth/logout', 'ApiController@logout');
+
     Route::get('test', function () {
         return response()->json(['foo' => 'bar']);
     });
@@ -44,8 +50,9 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 Route::group(['middleware' => ['api']], function () {
     Route::group(['middleware' => 'jwt.auth'], function () {
         Route::post('like', 'LikeController')->name('like.hit');
-        Route::get('/', 'V1\ProductController@index');
-        Route::post('/', 'V1\ProductController@getProductRank')->name('product.rank');
+        Route::post('/v1/product', 'V1\ProductController@index');
+        Route::post('/rank', 'V1\ProductController@getProductRank')->name('product.rank');
+        Route::get('/v1/{product}', 'V1\ProductController@show')->name('product.show');
 
     });
 });
@@ -59,5 +66,5 @@ Route::prefix('v1')->group(function () {
 
 
 Route::apiResource('/v1/post', 'V1\PostController');
-Route::apiResource('/v1/product', 'V1\ProductController');
+//Route::apiResource('/v1/product', 'V1\ProductController');
 

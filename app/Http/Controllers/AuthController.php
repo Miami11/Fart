@@ -9,7 +9,6 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-
 class AuthController extends Controller
 {
     public function authenticate(Request $request)
@@ -23,10 +22,8 @@ class AuthController extends Controller
             return response()->json(['error' => 'could_not_create_token'],
                 500); // something went wrong whilst attempting to encode the token
         }
-
         return response()->json(['token' => "Bearer $token"]);
     }
-
     /**
      * API Register
      *
@@ -36,7 +33,6 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $credentials = $request->only('name', 'email', 'password','tel','img');
-
         $rules = [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users'
@@ -48,16 +44,15 @@ class AuthController extends Controller
         $name = $request->name;
         $email = $request->email;
         $password = $request->password;
-
-       User::create([
-           'name' => $name,
-           'email' => $email,
-           'password' => Hash::make($password),
+        User::create([
+            'name' => $name,
+            'email' => $email,
+            'password' => Hash::make($password),
             'tel'=> $request->tel,
-           'img' => $request->img,
-       ]);
+            'img' => $request->img,
+        ]);
+        return response()->json(['success' => true]);
     }
-
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -98,5 +93,4 @@ class AuthController extends Controller
             return response()->json(['success' => false, 'error' => 'Failed to logout, please try again.'], 500);
         }
     }
-
 }

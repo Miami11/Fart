@@ -29,7 +29,8 @@
                     </div>
                 </div>
                 <div class="rightNav">
-                    <div class="contact">聯絡我們</div>
+                    <div class="login" v-on:click="toLoginPage" v-if="!login">登入</div>
+                    <div class="login" v-else>鼻要登出</div>
                     <div class="shopCar"><i class="fas fa-shopping-cart"></i></div>
                 </div>
             </div>
@@ -116,6 +117,18 @@
                 </div>
             </div>
 
+            <!-- footer -->
+            <div class="fourthArea">
+                <div class="footerText">
+                    <ul>
+                        <li>法爾特精品童裝</li>
+                        <li>02-2345-6789</li>
+                        <li>fart@fart.com</li>
+                    </ul>
+                </div>
+                <img src="{{ asset('images/icons/LOGO.png') }}" class="footerLogo">
+            </div>
+
         </div>
     </body>
 </html>
@@ -143,15 +156,21 @@ new Vue({
     },
     created: function(){
         var _this = this;
-        setInterval(function(){
-            _this.counting += 1;
-        }, 2000);
+        // setInterval(function(){
+        //     _this.counting += 1;
+        // }, 2000);
     },
     mounted: function(){
         console.log('mounted get product data');
+        if (localStorage.jwt_token) {
+            this.login = true;
+        }
         var _this = this;
         $.ajax({
             url: 'api/v1/product',
+            data: {
+
+            },
             success(data){
                 console.log(data.data[0].attributes.img[0].path);
                 _this.productList = data.data.splice(0,7);
@@ -159,7 +178,9 @@ new Vue({
         });
     },
     methods: {
-
+        toLoginPage(){
+            location.href = './entry/login';
+        }
     }
 })
 </script>
