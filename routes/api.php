@@ -50,10 +50,11 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 Route::group(['middleware' => ['api']], function () {
     Route::group(['middleware' => 'jwt.auth'], function () {
         Route::post('like', 'LikeController')->name('like.hit');
-        Route::get('/', 'V1\ProductController@index');
-        Route::post('/', 'V1\ProductController@getProductRank')->name('product.rank');
-
+        Route::post('/v1/product', 'V1\ProductController@index');
+        Route::post('/rank', 'V1\ProductController@getProductRank')->name('product.rank');
     });
+    Route::get('/v1/{product}', 'V1\ProductController@show')->name('product.show');
+
 });
 Route::prefix('v1')->group(function () {
     Route::get('category/{id}', 'CategoryController@categoryWithProduct')->name('category.product');
@@ -65,5 +66,5 @@ Route::prefix('v1')->group(function () {
 
 
 Route::apiResource('/v1/post', 'V1\PostController');
-Route::apiResource('/v1/product', 'V1\ProductController');
+//Route::apiResource('/v1/product', 'V1\ProductController');
 

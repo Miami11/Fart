@@ -5,14 +5,14 @@ namespace App\Http\Controllers\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Categories;
 use App\Http\Resources\CategoriesCollection;
-use App\Http\Resources\ProductStorageCollection;
-use App\Http\Resources\ProductStorageResource;
+use App\Like;
 use App\Repositories\ProductRepository;
 use App\Http\Resources\Product as ProductResource;
 use Illuminate\Http\Request;
 use App\Http\Resources\Categories as CategoriesResource;
 use App\Category;
 use App\Product;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
@@ -25,20 +25,50 @@ class ProductController extends Controller
 
     /**
      * Display a listing of the resource.
-     *  order by 買過的次數
+     *  一般列表
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
+        $take = $request->pageSize;
+        $user = JWTAuth::toUser($request->token);
+        $products = $take ? Product::with("imgs")->has("coupons")->take($take)->get()
+            : Product::with("imgs")->has("coupons")->get();
+        if ($user) {
+            $likes = Like::where("user_id",$user->id)->get()->pluck("product_id")->toArray();
+            $list = [];
 
-        return ProductResource::collection(Product::all());
+            foreach ($products as $key => $product) {
+                $list[$key]["img"] = $product->imgs;
+                $list[$key]["product_id"] = $product->id;
+                $list[$key]["price"] = $product->price;
+                $list[$key]["name"] = $product->name;
+                $list[$key]["auction_off"] = $product->coupons[0]["auction_off"];
+                $list[$key]["coupon_price"] = round($product->coupons[0]["auction_off"] * $product->price / 100);
+                $list[$key]["like"] = in_array($product->id,$likes);
+                $list[$key]["link"] = route('product.show',['product' => $product->id]);
+            }
+            return response()->json($list);
+        }
+        $list = [];
+        foreach ($products as $key => $product) {
+            $list[$key]["img"] = $product->imgs;
+            $list[$key]["product_id"] = $product->id;
+            $list[$key]["price"] = $product->price;
+            $list[$key]["name"] = $product->name;
+            $list[$key]["auction_off"] = $product->coupon[0]["auction_off"];
+            $list[$key]["coupon_price"] = round($product->coupons[0]["auction_off"] * $product->price / 100);
+            $list[$key]["link"] = route('product.show',['product' => $product->id]);
+
+        }
+
+        return response()->json($list);
 
     }
 
     public function categories()
     {
         return CategoriesResource::collection(Category::all());
-
     }
 
     public function getProductRank(Request $request)
@@ -47,7 +77,7 @@ class ProductController extends Controller
         $getAll = $this->repository->getOrderDetails();
         $product = $take
             ? $this->repository->queryCountOrderDetails($take)
-            :$this->repository->queryCountOrderDetails(count($getAll));
+            : $this->repository->queryCountOrderDetails(count($getAll));
 
         if (count($product) <= 0) {
             $product = $this->repository->queryAllProductByTime();
@@ -57,70 +87,10 @@ class ProductController extends Controller
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Product $product
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         return new ProductResource(Product::find($id));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Product $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Product $product
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Product $product)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Product $product
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Product $product)
-    {
-        //
-    }
 
 }

@@ -17,10 +17,10 @@ class LikeController extends Controller
 
         $product = Product::find($request->input('product_id'));
         $user->likes()->toggle($product);
-
+        //? 頁面顯示user點選了幾ㄍ
         return response([
             'status' => 'success',
-            'data' => $user
+//            'data' => $product
         ]);
     }
 }

@@ -10,7 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::prefix('backend')->group(function() {
+    Route::get('/login', function () {
+        return view('admin.Login.login');
+    });
+});
 Route::get('/', function () {
     return view('welcome');
 });
