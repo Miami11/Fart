@@ -19,10 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('products', 'ProductController@products');
+
 Route::prefix('entry')->group(function() {
 	Route::get('login','ProductController@show');
 	Route::get('register','ProductController@test');
-
 });
 
 Route::get('file', 'ProductController@index');

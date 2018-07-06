@@ -10,6 +10,7 @@
         <title>F.A.R.T</title>
         <script src="{{ asset('js/vue.js') }}"></script>
         <script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
+        <script src="{{ asset('js/common.js') }}"></script>
 
     </head>
     <body>
@@ -62,7 +63,7 @@
                             <h3 class="prodName">@{{item.attributes.name}}</h3>
                             <div class="prodPrize">$@{{item.attributes.price}}</div>
                             <div class="prodPopup">
-                                <div class="likeBtn"><i class="fas fa-heart"></i></div>
+                                <div class="likeBtn" v-on:click="like(item.id)"><i class="fas fa-heart"></i></div>
                                 <div class="cartBtn"><i class="fas fa-cart-plus"></i></div>
                             </div>
                         </div>
@@ -141,7 +142,8 @@ new Vue({
         login: false,
         navIn: false,
         counting: 0,
-        productList: []
+        productList: [],
+        token: ''
     },
     computed: {
         mobileNavCss: function(){
@@ -165,6 +167,7 @@ new Vue({
         if (localStorage.jwt_token) {
             this.login = true;
         }
+        this.token = localStorage.jwt_token;
         var _this = this;
         $.ajax({
             url: 'api/v1/product',
@@ -180,6 +183,25 @@ new Vue({
     methods: {
         toLoginPage(){
             location.href = './entry/login';
+        },
+        like(id){
+            $.ajax({
+                type: 'POST',
+                headers: {"Authorization": "BEARER " + this.token},
+                url: 'api/like',
+                data: {
+                    product_id: id
+                },
+                success(data){
+                    console.log(data);
+                    if (data.status == 'success') {
+                        alert('好棒棒' + data.data.id);
+                    }
+                },
+                error(error){
+                    console.log(error);
+                }
+            });
         }
     }
 })
