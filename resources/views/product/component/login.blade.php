@@ -11,6 +11,7 @@
         <title>F.A.R.T</title>
         <script src="{{ asset('js/vue.js') }}"></script>
         <script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
+        <script src="{{ asset('js/common.js') }}"></script>
     </head>
 <body>
 	<div id="app">
