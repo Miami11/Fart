@@ -18,6 +18,9 @@
     position: relative;
     overflow: hidden;
     transition: .3s;
+    transform: scaleX(0);
+}
+.modal .message-body.open{
     transform: scaleX(1);
 }
 .modal .message-content{

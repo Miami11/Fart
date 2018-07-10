@@ -106,4 +106,9 @@ class ProductController extends Controller
            $path = 'uploads/images/products/'.$name;
         return view('upload',['img_path' => $path]);
     }
+
+    public function products()
+    {
+        return view('product.component.products');
+    }
 }
