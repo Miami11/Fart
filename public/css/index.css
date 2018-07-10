@@ -199,6 +199,7 @@ img.indexLogo{
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    box-shadow: 1px 1px 1px 0px #756a6a inset;
 }
 .likeBtn{
 	top: 15px;
@@ -289,9 +290,9 @@ img.footerLogo{
 		align-items: flex-start;
 		flex-direction:column;
 		width: 100%;
-		height: calc(100vh - 50px);
+		height: calc(100vh - 60px);
 		position: absolute;
-		top: 50px;
+		top: 60px;
 		left: -100%;
 		transition: 0.5s;
 		background-color: rgba(255,255,255,0.8);
