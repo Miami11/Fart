@@ -14,9 +14,13 @@ Route::prefix('backend')->group(function() {
     Route::get('/login', function () {
         return view('admin.Login.login');
     });
+
+    Route::resource('products', 'Admin\ProductController');
+    Route::resource('posts', 'Admin\PostController');
 });
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.index');
 });
 
 Route::get('products', 'ProductController@products');
@@ -30,7 +34,6 @@ Route::get('file', 'ProductController@index');
 Route::post('upload','ProductController@upload')->name('admin.upload');
 
 
-Route::resource('posts', 'Admin\PostController');
 Route::get('user/verify/{verification_code}', 'AuthController@verifyUser');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');
 Route::post('password/reset', 'Auth\ResetPasswordController@postReset')->name('password.reset');
