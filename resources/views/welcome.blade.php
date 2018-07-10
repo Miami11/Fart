@@ -170,12 +170,14 @@ new Vue({
         this.token = localStorage.jwt_token;
         var _this = this;
         $.ajax({
+            // type: 'POST',
             url: 'api/v1/product',
             data: {
 
             },
             success(data){
-                console.log(data.data[0].attributes.img[0].path);
+                console.log(data);
+                // console.log(data.data[0].attributes.img[0].path);
                 _this.productList = data.data.splice(0,7);
             }
         });
