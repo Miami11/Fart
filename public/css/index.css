@@ -6,6 +6,15 @@ html,body{
 a{
 	text-decoration: none;
 }
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}
+.clearfix{
+	clear: both;
+}
 .navArea{
 	display: flex;
 	width: 100%;
@@ -13,6 +22,7 @@ a{
 	align-items: center;
 	box-shadow: 0px 0px 25px #333;
 	height: 60px;
+	background-color: #fff;
 }
 .leftNav{
 	display: flex;

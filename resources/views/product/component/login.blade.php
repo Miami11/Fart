@@ -114,11 +114,11 @@ new Vue({
                 success(data){
                     console.log(data);
                     if (data.success) {
-                        alert('login success');
+                        $.toast.confirm('login success');
                         localStorage.setItem('jwt_token', data.result.token);
                         location.href = '../../';
                     }else{
-                        alert(data.message);
+                        $.toast.confirm(data.message);
                     }
                 }
             });
@@ -137,7 +137,7 @@ new Vue({
                 success(data){
                     console.log(data);
                     if (data.status == 'success') {
-                        alert('oh ya!');
+                        $.toast.confirm('oh ya!');
                     }
                 }
             });

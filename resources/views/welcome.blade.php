@@ -170,7 +170,8 @@ new Vue({
         this.token = localStorage.jwt_token;
         var _this = this;
         $.ajax({
-            // type: 'POST',
+            type: 'POST',
+            headers: {"Authorization": "BEARER " + this.token},
             url: 'api/v1/product',
             data: {
 
@@ -178,7 +179,7 @@ new Vue({
             success(data){
                 console.log(data);
                 // console.log(data.data[0].attributes.img[0].path);
-                _this.productList = data.data.splice(0,7);
+                // _this.productList = data.data.splice(0,7);
             }
         });
     },
