@@ -24,6 +24,10 @@ a{
 	height: 60px;
 	background-color: #fff;
 }
+.navv a{
+	color: #000;
+	text-decoration: none;
+}
 .leftNav{
 	display: flex;
 	justify-content: flex-start;
@@ -121,6 +125,8 @@ a{
 	padding: 100px 20px;
 	background-size: cover;
 	text-align: right;
+	color: #fff;
+    text-shadow: 0px 0px 10px #b3a557;
 }
 .thirdArea{
 	overflow: hidden;
@@ -273,7 +279,7 @@ img.footerLogo{
     position: relative;
     left: 5px;
 }
-.tabs.active{
+.tabs.active, .tabs.active a{
 	color: #ff4c4c;
     text-shadow: 1px 1px 0px #ccc;
 }

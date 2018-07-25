@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/cssReset.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/index.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/modal.css') }}">
         <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
         <title>F.A.R.T</title>
         <script src="{{ asset('js/vue.js') }}"></script>
@@ -22,11 +23,11 @@
                     <div class="logo"><img class="indexLogo" src="{{ asset('images/icons/LOGO.png') }}" alt="logo"></div>
                     <div class="ham" @click="navIn = !navIn"><img class="indexLogo" src="{{ asset('images/icons/LOGO.png') }}" alt="logo"></div>
                     <div :class="mobileNavCss">
-                        <div class="babyCloth">嬰兒衣服<i class="fas fa-angle-down upAndDown"></i></div>
-                        <div class="babyPants">嬰兒褲/裙<i class="fas fa-angle-down upAndDown"></i></div>
-                        <div class="babyToy">玩具<i class="fas fa-angle-down upAndDown"></i></div>
-                        <div class="mamaCloth">媽媽服裝<i class="fas fa-angle-down upAndDown"></i></div>
-                        <div class="others">周邊商品<i class="fas fa-angle-down upAndDown"></i></div>
+                        <div class="navv babyCloth"><a href="./products">嬰兒衣服</a><i class="fas fa-angle-down"></i></div>
+                        <div class="navv babyPants">嬰兒褲/裙<i class="fas fa-angle-down"></i></div>
+                        <div class="navv babyToy">玩具<i class="fas fa-angle-down"></i></div>
+                        <div class="navv mamaCloth">媽媽服裝<i class="fas fa-angle-down"></i></div>
+                        <div class="navv others">周邊商品<i class="fas fa-angle-down"></i></div>
                     </div>
                 </div>
                 <div class="rightNav">
@@ -48,8 +49,8 @@
 
             <!-- some slogan -->
             <div class="secondArea">
-                <h3>This is a book</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste odio minus, possimus iure recusandae rerum facere praesentium veniam, eum aliquam.</p>
+                <h3>嚴選品質，舒適穿搭</h3>
+                <p>法爾特從日本韓國進口高品質童裝，每一件衣服的品質都經過我們把關，<br>我們精心挑選最好看的衣服，多變的樣式供您挑選。</p>
             </div>
 
             <!-- products silder -->
@@ -170,7 +171,7 @@ new Vue({
         this.token = localStorage.jwt_token;
         var _this = this;
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             headers: {"Authorization": "BEARER " + this.token},
             url: 'api/v1/product',
             data: {
@@ -179,7 +180,7 @@ new Vue({
             success(data){
                 console.log(data);
                 // console.log(data.data[0].attributes.img[0].path);
-                // _this.productList = data.data.splice(0,7);
+                _this.productList = data.data.splice(0,7);
             }
         });
     },
@@ -198,11 +199,12 @@ new Vue({
                 success(data){
                     console.log(data);
                     if (data.status == 'success') {
-                        alert('好棒棒' + data.data.id);
+                        $.toast.alert('好棒棒' + data.data.id);
                     }
                 },
                 error(error){
                     console.log(error);
+                    $.toast.confirm('嗶嗶！報錯了！');
                 }
             });
         }
