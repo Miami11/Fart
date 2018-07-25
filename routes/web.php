@@ -24,6 +24,7 @@ Route::get('/', function () {
 });
 
 Route::get('products', 'ProductController@products');
+Route::get('product_detail', 'ProductController@detail');
 
 Route::prefix('entry')->group(function() {
 	Route::get('login','ProductController@show');

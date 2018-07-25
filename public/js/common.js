@@ -21,7 +21,7 @@
 			}
 
 			$(toastTmpl).appendTo($('body')).delay(100).queue(function(){
-				console.log($(this));
+				// console.log($(this));
 				$(this).find('.message-body').addClass('open').dequeue();
 			});
 

@@ -1,0 +1,113 @@
+.productDetailPage{
+	background: url(../images/background/gray-3.png) center center;
+    background-size: cover;
+    padding-bottom: 90px;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+.productDetailPage .detailArea{
+	width: 90%;
+    background-color: #eee;
+    border-radius: 0 30px 30px 0;
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
+    padding: 15px;
+    position: relative;
+    transform: translateX(-100vw);
+    transition: .5s;
+}
+.productDetailPage .prodImgWrapper{
+	display: flex;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.productDetailPage .mainProdImg{
+	flex: 4;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.productDetailPage .slideProdImg{
+	flex: 1;
+    display: flex;
+    max-height: 600px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.w100p{
+	width: 100%;
+}
+.pPrice{
+	text-align: right;
+	color: #ff4c4c;
+}
+.prodIntro{
+	max-width: 900px;
+}
+.productDetailPage .detailArea.uSeeMe{
+	transform: translateX(0vw);
+}
+.subImgBlock{
+	cursor: pointer;
+	box-sizing: border-box;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+/*mobile device*/
+@media screen and (max-width: 767px) {
+	.productDetailPage .detailArea{
+	    top: 85px;
+	}
+	.productDetailPage .mainProdImg{
+	    padding-bottom: 70%;
+	}
+	.productDetailPage .prodImgWrapper{
+		flex-direction: column;
+	}
+	.productDetailPage .slideProdImg{
+	    flex-direction: row;
+	    margin-top: 20px;
+	}
+	.subImgBlock{
+		width: 85px;
+		padding-bottom: 85px;
+		margin: 0 5px;
+	}
+	.subImgBlock.active{
+		padding-bottom: 81px;
+	}
+	.subImgBlock.active{
+		border: 2px solid #ce740e;
+	}
+	.prodIntro{
+		margin: 15px 5px;
+	}
+}
+/*PC*/
+@media screen and (min-width: 768px) {
+	.productDetailPage .detailArea{
+	    top: 25px;
+	}
+	.productDetailPage .mainProdImg{
+	    padding-bottom: 60%;
+	    margin: 0px 30px;
+	}
+	.productDetailPage .slideProdImg{
+	    flex-direction: column;
+    	padding: 0px 10px;
+	}
+	.subImgBlock{
+		width: 100%;
+		padding-bottom: 100%;
+		margin: 0px 0px 5px 0px;
+	}
+	.subImgBlock.active{
+		padding-bottom: calc(100% - 6px);
+	}
+	.subImgBlock.active{
+		border: 3px solid #ce740e;
+	}
+	.prodIntro{
+		margin: 20px 30px;
+	}
+}

@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/cssReset.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/modal.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/index.css') }}">
         <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
         <title>F.A.R.T</title>
@@ -22,11 +23,11 @@
                     <div class="logo"><img class="indexLogo" src="{{ asset('images/icons/LOGO.png') }}" alt="logo"></div>
                     <div class="ham" @click="navIn = !navIn"><img class="indexLogo" src="{{ asset('images/icons/LOGO.png') }}" alt="logo"></div>
                     <div :class="mobileNavCss">
-                        <div class="tabs babyCloth active">嬰兒衣服<i class="fas fa-angle-down upAndDown"></i></div>
-                        <div class="tabs babyPants">嬰兒褲/裙<i class="fas fa-angle-down upAndDown"></i></div>
-                        <div class="tabs babyToy">玩具<i class="fas fa-angle-down upAndDown"></i></div>
-                        <div class="tabs mamaCloth">媽媽服裝<i class="fas fa-angle-down upAndDown"></i></div>
-                        <div class="tabs others">周邊商品<i class="fas fa-angle-down upAndDown"></i></div>
+                        <div class="tabs babyCloth active"><a href="./products">嬰兒衣服</a><i class="fas fa-angle-down"></i></div>
+                        <div class="tabs babyPants">嬰兒褲/裙<i class="fas fa-angle-down"></i></div>
+                        <div class="tabs babyToy">玩具<i class="fas fa-angle-down"></i></div>
+                        <div class="tabs mamaCloth">媽媽服裝<i class="fas fa-angle-down"></i></div>
+                        <div class="tabs others">周邊商品<i class="fas fa-angle-down"></i></div>
                     </div>
                 </div>
                 <div class="rightNav">
@@ -46,7 +47,7 @@
                     <img src="http://fart.test/uploads/images/products/product1524728818.jpg" class="prodImg">
                     <h3 class="prodName">12321</h3>
                     <div class="prodPrize">$12321</div>
-                    <div class="prodPopup">
+                    <div class="prodPopup" v-on:click="goDetail">
                         <div class="likeBtn" v-on:click="like(i)"><i class="fas fa-heart"></i></div>
                         <div class="cartBtn"><i class="fas fa-cart-plus"></i></div>
                     </div>
@@ -115,6 +116,9 @@ new Vue({
                     console.log(error);
                 }
             });
+        },
+        goDetail(){
+            location.href = './product_detail';
         }
     }
 })

@@ -111,4 +111,9 @@ class ProductController extends Controller
     {
         return view('product.component.products');
     }
+
+    public function detail()
+    {
+        return view('product.component.product_detail');
+    }
 }
